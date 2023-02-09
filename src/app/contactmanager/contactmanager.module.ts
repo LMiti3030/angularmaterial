@@ -14,6 +14,7 @@ import { MaterialModule } from '../shared/material.module';
 
 
 import { UserService } from './services/user.service';
+import { NotesComponent } from './components/notes/notes.component';
 
 
 const routes: Routes =[
@@ -33,7 +34,8 @@ const routes: Routes =[
     ContactmanagerAppComponent,
     ToolbarComponent,
     MainContentComponent,
-    SidenavComponent
+    SidenavComponent,
+    NotesComponent
   ],
   imports: [
     CommonModule,

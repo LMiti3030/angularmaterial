@@ -1,5 +1,7 @@
 import { BreakpointObserver, Breakpoints, BreakpointState } from '@angular/cdk/layout';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { MatSidenav } from '@angular/material/sidenav';
+import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import { User } from '../../models/user';
 import { UserService } from '../../services/user.service';
@@ -18,8 +20,11 @@ export class SidenavComponent implements OnInit{
 
   users!: Observable<User[]>;
 
+  @ViewChild(MatSidenav) sidenav !: MatSidenav;
+
   constructor(private breakPointObserver : BreakpointObserver,
-    private userService: UserService){
+    private userService: UserService,
+    private router: Router){
 
   }
 
@@ -38,10 +43,29 @@ export class SidenavComponent implements OnInit{
 
       this.userService.loadAll();
 
-      this.users.subscribe({
-        next: data => console.log(data)
-      });
+      //unncesssary as the main-content already does this
+      //keep it for reference
+      // this.users.subscribe({
+      //   next: data => {
+      //     console.log(data);
+      //     if(data.length > 0) {
+      //       this.router.navigate(['/contactmanager', data[0].id]);
+      //     }
+      //   }
+      // });
 
+      this.closeSideNavOnSmallScreen();
+  }
+
+  closeSideNavOnSmallScreen(){
+    this.router.events.subscribe( {
+      next: () => {
+        if(this.isScreenSmall){
+          //TODO close sidenav
+          this.sidenav.close();
+        }
+      }
+    } );
   }
 
 }
