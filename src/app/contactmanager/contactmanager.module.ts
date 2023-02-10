@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import {Routes, RouterModule} from '@angular/router';
 import { HttpClientModule } from '@angular/common/http';
 
@@ -15,6 +15,7 @@ import { MaterialModule } from '../shared/material.module';
 
 import { UserService } from './services/user.service';
 import { NotesComponent } from './components/notes/notes.component';
+import { NewContactDialogComponent } from './components/new-contact-dialog/new-contact-dialog.component';
 
 
 const routes: Routes =[
@@ -35,7 +36,8 @@ const routes: Routes =[
     ToolbarComponent,
     MainContentComponent,
     SidenavComponent,
-    NotesComponent
+    NotesComponent,
+    NewContactDialogComponent
   ],
   imports: [
     CommonModule,
@@ -43,7 +45,8 @@ const routes: Routes =[
     MaterialModule,
     FormsModule,
     RouterModule.forChild(routes),
-    HttpClientModule
+    HttpClientModule,
+    ReactiveFormsModule
   ],
   providers: [
     UserService
